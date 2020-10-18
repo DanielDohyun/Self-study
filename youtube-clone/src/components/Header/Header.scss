@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20PX;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+
+  &__logo {
+    height: 20px;
+    object-fit: contain;
+    margin-left: 20px;
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    border: 1px solid lightgray;
+  }
+
+/* !important to override default width */
+  &__inputBtn {
+    width: 50px !important;
+    background-color: #fafafa;
+    border-left: 1px solid lightgray;
+    color: gray;
+  }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    margin-right: 8px;
+  }
+
+/* target the input field which is direct child of input div */
+  &__input > input {
+    flex: 1;
+    border: none;
+  }
+}
