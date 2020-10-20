@@ -1,3 +1,10 @@
 .sidebar {
   flex: 0.2;
+
+  & > hr {
+    height: 1px;
+    border: 0;
+    background-color: lightgray;
+    margin: 10px 0;
+  }
 }
