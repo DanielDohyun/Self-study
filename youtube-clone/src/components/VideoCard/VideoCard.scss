@@ -10,5 +10,26 @@
     &__info {
         display: flex;
         margin-top: 10px;
+        padding-right: 30px;
+    }
+
+    &__avatar {
+        // use important to override material-ui property
+        height: 30px !important;
+        width: 30px !important;
+    }
+
+    &__text {
+        margin-left: 15px;
+    }
+
+    &__text > h4 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    &__text > p {
+        font-size: 14px;
+        color: gray;
     }
 }
