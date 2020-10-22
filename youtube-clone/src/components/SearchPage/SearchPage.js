@@ -14,12 +14,14 @@ function SearchPage() {
 
             <ChannelRow 
                 image
-                Channel
+                channel
                 verified
                 subs
                 noOfVideos
                 description
             />
+
+            <hr />
         </div>
     )
 }
