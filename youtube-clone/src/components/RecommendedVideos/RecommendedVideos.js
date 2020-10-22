@@ -6,7 +6,7 @@ function RecommendedVideos() {
   return (
     <div className="recommend">
       <h2>Recommended</h2>
-      <div className="recommended__videos">
+      <div className="recommend__videos">
         <VideoCard />
         <VideoCard />
         <VideoCard />
