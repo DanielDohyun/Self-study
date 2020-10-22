@@ -11,6 +11,7 @@ function App() {
     <div className="app">
       <Router>
         <Header/>
+
         <Switch>
           <Route path="/search/:serachTerm">
             <div className="app__search">
