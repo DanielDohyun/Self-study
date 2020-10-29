@@ -1,3 +1,5 @@
+// const { response } = require("express");
+
 const form = document.querySelector('form');
 const loadingElement = document.querySelector('.loading');
 const API_URL = 'http://localhost:5000/mews';
@@ -24,6 +26,9 @@ form.addEventListener('submit', e => {
         headers: {
             'content-type': 'application/json'
         }
-    });
+    }).then(response => response.json())
+    .then(createdMew => {
+        console.log(createdMew);
+    })
 })
 
