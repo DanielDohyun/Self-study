@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Login/Login';
 import { getTokenFromUrl } from "./spotify";
 import SpotifyWebApi from "spotify-web-api-js";
+import Player from './components/Player/Player';
 
 // creating an instance of spotify inside of the app.
 const spotify = new SpotifyWebApi();
@@ -41,7 +42,7 @@ function App() {
     <div className="app">
       {
         token ? (
-          <h1>I'm logged in</h1>
+          <Player />
         ) : (
           <Login />
         )
