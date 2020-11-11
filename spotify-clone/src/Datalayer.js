@@ -7,8 +7,10 @@ from 'react';
 export const DataLayerContext = createContext();
 
 // for this case, chilredn is the app component
-export const DataLayer = ({ initalState, reducer, children }) => {
-    <DataLayerContext.Provider value={useReducer(reducer, initalState)}>
+export const DataLayer = ({ initialState, reducer, children }) => (
+    <DataLayerContext.Provider value={useReducer(reducer, initialState)}>
         {children}
     </DataLayerContext.Provider>
-}
+);
+
+export const useDataLayerValue = () => useContext(DataLayerContext);
