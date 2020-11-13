@@ -43,15 +43,17 @@ function App() {
           user:user,
         });
       });
+      spotify.getUserPlaylists().then((playlists) => {
+        dispatch({
+          type: "SET_PLAYLISTS",
+          playlists: playlists,
+        });
+      });
     }
-
-    // console.log('I have a token: ', _token)
 
     // if you want this to run only once, leave [] as blank. if you put a variable, it will run whenever that variable changes ex [name]
   }, []);
 
-  // console.log(user);
-  // console.log(token);
 
   return (
     <div className="app">
