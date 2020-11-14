@@ -43,12 +43,20 @@ function App() {
           user:user,
         });
       });
+
       spotify.getUserPlaylists().then((playlists) => {
         dispatch({
           type: "SET_PLAYLISTS",
           playlists: playlists,
         });
       });
+
+      spotify.getPlaylist('37i9dQZEVXcIJazRV9ISoM').then(response => {
+        dispatch({
+          type: "SET_DISCOVER_SEEKLY",
+          discover_weekly: response,
+        })
+      })
     }
 
     // if you want this to run only once, leave [] as blank. if you put a variable, it will run whenever that variable changes ex [name]
