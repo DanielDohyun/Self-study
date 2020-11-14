@@ -4,6 +4,8 @@
     height: 100vh;
     color: white;
     background: linear-gradient(rgb(91, 87, 115), rgba(0, 0, 0, 1));
+    // to hide list of songs that go beyond the height of the page
+    overflow-y: overlay;
 
     &__info {
         display: flex;
@@ -28,6 +30,10 @@
         & > p {
             font-size: 14px;
         }
+    }
+
+    &__songs {
+        margin: 20px -30px;
     }
 
     &__icons {
