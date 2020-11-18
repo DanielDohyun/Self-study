@@ -2,20 +2,38 @@ import React, { useState, useEffect } from 'react';
 import './App.scss';
 import Post from './components/Post/Post';
 import { db } from './firebase';
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import { Button } from '@material-ui/core';
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 function App() {
-  const [posts, setPosts] = useState([
-    {
-      username: 'dan',
-      caption: 'hello',
-      imgUrl: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/14112506/Pembroke-Welsh-Corgi-standing-outdoors-in-the-fall.jpg",
-    },
-    {
-      username: 'dan',
-      caption: 'hello',
-      imgUrl: 'https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png',
-    }
-  ]);
+  const classes = useStyles();
+  const [modalStyle] = React.useState(getModalStyle);
+
+  const [open, setOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   // useEffect = runs a piece of code based on a spe condi
   useEffect(()=> {
@@ -32,6 +50,17 @@ function App() {
 
   return (
     <div className="app">
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+         <div style={modalStyle} className={classes.paper}>
+         <h2>I am a modal</h2>  
+         </div>
+      </Modal>
+
+      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+
       <div className="app__header">
         <img className="app__logo" src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png" alt="insta" />
       </div>
