@@ -16,4 +16,15 @@
     height: 40px;
    
   }
+
+  &__headerImg {
+    object-fit: contain;
+    height: 40px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 }
