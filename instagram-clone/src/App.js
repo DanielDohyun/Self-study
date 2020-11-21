@@ -82,7 +82,9 @@ function App() {
         displayName: username
       })
     })
-    .catch(e => alert(e.message))
+    .catch(e => alert(e.message));
+
+    setOpen(false);
   };
 
   const signIn = (e) => {
@@ -98,7 +100,12 @@ function App() {
   return (
     <div className="app">
 
-      <ImgUpload />
+      {user?.displayName ? (
+        <ImgUpload username={user.displayName}/>
+
+      ): (
+        <h3>Sorry you need to login to upload</h3>
+      )}
 
       <Modal
         open={open}
