@@ -33,6 +33,7 @@ function App() {
   const [modalStyle] = React.useState(getModalStyle);
 
   const [open, setOpen] = useState(false);
+  cont [openSignIn, setOpenSignIn] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -89,13 +90,14 @@ function App() {
         onClose={() => setOpen(false)}
       >
          <div style={modalStyle} className={classes.paper}>
-          <form>
-            <center  className="app__form">
+          <form className="app__form">
+            <center>
               <img
                 className="app__headerImg"
                 src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png"
                 alt=""
               />
+            </center>
 
               <Input
                 placeholder="username"
@@ -118,18 +120,63 @@ function App() {
                 onChange={e => setPassword(e.target.value)}
               /> 
 
-              <Button onClick={signUp}>Sign Up</Button>
+              <Button type="submit" onClick={signUp}>Sign Up</Button>
 
-            </center>
           </form>
          </div>
       </Modal>
 
-      <Button type="submit" onClick={() => setOpen(true)}>Sign Up</Button>
+      <Modal
+        open={openSignIn}
+        onClose={() => setOpenSignIn(false)}
+      >
+         <div style={modalStyle} className={classes.paper}>
+          <form className="app__form">
+            <center>
+              <img
+                className="app__headerImg"
+                src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png"
+                alt=""
+              />
+            </center>
+
+              <Input
+                placeholder="email"
+                type="text"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+
+              <Input
+                placeholder="password"
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              /> 
+
+              <Button type="submit" onClick={signIn}>Sign In</Button>
+
+          </form>
+         </div>
+      </Modal>
+
 
       <div className="app__header">
         <img className="app__logo" src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png" alt="insta" />
+      
+      
       </div>
+
+      {user ? (
+      <Button type="submit" onClick={() => auth.signOut() }>Logout</Button>
+
+      ): (
+        <div className="app__loginContainer">
+          <Button type="submit" onClick={() => setOpenSignIn(true)}>Sign In</Button>
+          <Button type="submit" onClick={() => setOpen(true)}>Sign Up</Button>
+        </div>
+      )}
+
 
       {
         posts.map(({ id, post }) => (
