@@ -31,5 +31,11 @@
 
   &__posts {
     padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__postsRight {
+    margin-left: 20px;
   }
 }
