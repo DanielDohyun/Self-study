@@ -64,7 +64,7 @@ function App() {
     
     // if you leave the [] blank, it will run once when the page refreshes
     // if you put posts inside of [], it will run everytime when posts changes
-    db.collection('posts').onSnapshot(snapshot => {
+    db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
       setPosts(snapshot.docs.map(doc => ({
         id: doc.id,
         post: doc.data()
@@ -99,13 +99,6 @@ function App() {
 
   return (
     <div className="app">
-
-      {user?.displayName ? (
-        <ImgUpload username={user.displayName}/>
-
-      ): (
-        <h3>Sorry you need to login to upload</h3>
-      )}
 
       <Modal
         open={open}
@@ -184,24 +177,33 @@ function App() {
 
       <div className="app__header">
         <img className="app__logo" src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png" alt="insta" />
+         {/* if user is signed in => show logout button. else show signup+ signin btn */}
+        {user ? (
+        <Button type="submit" onClick={() => auth.signOut() }>Logout</Button>
+
+        ): (
+          <div className="app__loginContainer">
+            <Button type="submit" onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            <Button type="submit" onClick={() => setOpen(true)}>Sign Up</Button>
+          </div>
+        )}
       </div>
 
-      {/* if user is signed in => show logout button. else show signup+ signin btn */}
-      {user ? (
-      <Button type="submit" onClick={() => auth.signOut() }>Logout</Button>
+     <div className="app__posts">
+      {
+          posts.map(({ id, post }) => (
+            <Post key={id} username={post?.username} caption={post?.caption} imgUrl={post?.imgUrl} />
+          ))
+      }
+     </div>
+
+      {user?.displayName ? (
+        <ImgUpload username={user.displayName}/>
 
       ): (
-        <div className="app__loginContainer">
-          <Button type="submit" onClick={() => setOpenSignIn(true)}>Sign In</Button>
-          <Button type="submit" onClick={() => setOpen(true)}>Sign Up</Button>
-        </div>
+        <h3>Sorry you need to login to upload</h3>
       )}
 
-      {
-        posts.map(({ id, post }) => (
-          <Post key={id} username={post?.username} caption={post?.caption} imgUrl={post?.imgUrl} />
-        ))
-      }
 
     </div>
   );
