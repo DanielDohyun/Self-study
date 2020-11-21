@@ -32,8 +32,9 @@ function App() {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
 
+  // open for signup and opensignin for sign in
   const [open, setOpen] = useState(false);
-  cont [openSignIn, setOpenSignIn] = useState(false);
+  const [openSignIn, setOpenSignIn] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +58,19 @@ function App() {
     }
   }, [user, username]);
 
+  // useEffect = runs a piece of code based on a spe condi
+  useEffect(()=> {
+    
+    // if you leave the [] blank, it will run once when the page refreshes
+    // if you put posts inside of [], it will run everytime when posts changes
+    db.collection('posts').onSnapshot(snapshot => {
+      setPosts(snapshot.docs.map(doc => ({
+        id: doc.id,
+        post: doc.data()
+      })));
+    })
+  }, []);
+
   const signUp = (e) => {
     e.preventDefault();
 
@@ -70,18 +84,15 @@ function App() {
     .catch(e => alert(e.message))
   };
 
-  // useEffect = runs a piece of code based on a spe condi
-  useEffect(()=> {
-    
-    // if you leave the [] blank, it will run once when the page refreshes
-    // if you put posts inside of [], it will run everytime when posts changes
-    db.collection('posts').onSnapshot(snapshot => {
-      setPosts(snapshot.docs.map(doc => ({
-        id: doc.id,
-        post: doc.data()
-      })));
-    })
-  }, []);
+  const signIn = (e) => {
+    e.preventDefault();
+
+    auth
+    .signInWithEmailAndPassword(email, password)
+    .catch(e => alert(e.message));
+
+    setOpenSignIn(false);
+  };
 
   return (
     <div className="app">
@@ -160,13 +171,11 @@ function App() {
          </div>
       </Modal>
 
-
       <div className="app__header">
         <img className="app__logo" src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png" alt="insta" />
-      
-      
       </div>
 
+      {/* if user is signed in => show logout button. else show signup+ signin btn */}
       {user ? (
       <Button type="submit" onClick={() => auth.signOut() }>Logout</Button>
 
@@ -177,14 +186,12 @@ function App() {
         </div>
       )}
 
-
       {
         posts.map(({ id, post }) => (
           <Post key={id} username={post?.username} caption={post?.caption} imgUrl={post?.imgUrl} />
         ))
       }
 
-    
     </div>
   );
 }
