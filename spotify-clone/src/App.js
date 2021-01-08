@@ -4,7 +4,7 @@ import Login from './components/Login/Login';
 import { getTokenFromUrl } from "./spotify";
 import SpotifyWebApi from "spotify-web-api-js";
 import Player from './components/Player/Player';
-import { useDataLayerValue } from './DataLayer';
+import { useDataLayerValue } from './Datalayer';
 
 // creating an instance of spotify inside of the app.
 const spotify = new SpotifyWebApi();

@@ -4,7 +4,7 @@ import './Sidebar.scss';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
-import { useDataLayerValue } from '../../DataLayer';
+import { useDataLayerValue } from '../../Datalayer';
 
 function Sidebar() {
     const [{ playlists }, dispatch] = useDataLayerValue();
